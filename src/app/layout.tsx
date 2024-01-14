@@ -1,22 +1,31 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] })
+import Header from "@/components/Header";
+
+import "@/firebase/config";
+import AuthGoogleProvider from "@/context/AuthGoogle";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'FastWind',
-  description: 'A website game fast as wind~',
-}
+  title: "FastWind",
+  description: "A website game fast as wind~",
+};
+
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="dark">
+      <body className={inter.className}>
+        <Header />
+        <AuthGoogleProvider>{children}</AuthGoogleProvider>
+      </body>
     </html>
-  )
+  );
 }
